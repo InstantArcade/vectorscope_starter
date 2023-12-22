@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RGB565 Color Picker</title>
+</head>
+<body>
+    <input type="color" id="colorPicker">
+    <p>RGB565 Value: <span id="rgb565Value"></span></p>
+
+    <script>
+        // Function to convert a hex color to its RGB components
+        function hexToRgb(hex) {
+            var bigint = parseInt(hex, 16);
+            var r = (bigint >> 16) & 255;
+            var g = (bigint >> 8) & 255;
+            var b = bigint & 255;
+
+            return [r, g, b];
+        }
+
+        // Function to convert RGB888 to RGB565
+        function rgb888ToRgb565(r, g, b) {
+            var rgb565 = ((r & 0xF8) << 8) | ((g & 0xFC) << 3) | (b >> 3);
+            return rgb565.toString(16).toUpperCase();
+        }
+
+        // Listener for the color picker
+        document.getElementById("colorPicker").addEventListener("input", function() {
+            var hexColor = this.value.substring(1); // Remove the # from the hex color
+            var rgb888 = hexToRgb(hexColor);
+            var rgb565 = rgb888ToRgb565(rgb888[0], rgb888[1], rgb888[2]);
+            document.getElementById("rgb565Value").innerText = "0x" + rgb565;
+        });
+    </script>
+</body>
+</html>

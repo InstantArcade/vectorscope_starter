@@ -30,3 +30,10 @@
 *.exe
 *.out
 *.app
+
+# OSX trash
+.DS_Store
+
+# folders
+.pio/
+.vscode/
